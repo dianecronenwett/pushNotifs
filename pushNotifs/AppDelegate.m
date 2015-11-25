@@ -32,6 +32,18 @@
     return YES;
 }
 
+-(void) application:(UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification{
+    UIAlertController *ac =[UIAlertController alertControllerWithTitle:@"Receive while running" message:notification.alertBody preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *aa = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+    
+    [ac addAction:aa];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [application.keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
+    });
+}
+
+
 -(void) application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forLocalNotification:(nonnull UILocalNotification *)notification completionHandler:(nonnull void (^)())completionHandler{
 
     UIAlertController *ac =[UIAlertController alertControllerWithTitle:@"Receive on action" message:identifier preferredStyle:UIAlertControllerStyleAlert];
@@ -46,24 +58,5 @@
     completionHandler();
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-   
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-   
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-  
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-  
-}
 
 @end
