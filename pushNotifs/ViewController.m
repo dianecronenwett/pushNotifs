@@ -7,22 +7,25 @@
 //
 
 #import "ViewController.h"
-
+@import UIKit;
 @interface ViewController ()
 
 - (void) requestPermissionToNotify;
-
 - (void) createNotification:(int)secondsInTheFuture;
+
 
 @end
 
 
 @implementation ViewController
 
+
 - (IBAction)scheduleTapped:(id)sender {
         [self requestPermissionToNotify];
         [self createNotification:5];
-}
+    }
+
+
 
 - (void) requestPermissionToNotify{
     
@@ -77,12 +80,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
+   
+    CAShapeLayer *circleLayer = [CAShapeLayer layer];
+    [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(100, 100, 100, 100)] CGPath]];
+    
+    
+    [[self.view layer] addSublayer:circleLayer];
+    
+    [circleLayer setStrokeColor:[[UIColor redColor] CGColor]];
+    [circleLayer setFillColor:[[UIColor clearColor] CGColor]];
+    
+    circleLayer.position = CGPointMake(55,220);
+
+    
+    }
+   
+   
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 @end
